@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>INSTAGRAM - KNOW WHO DOESN'T FOLLOW YOU BACK</title>
+<style>
+:root{color-scheme:light dark;--bg:#f4f4f5;--panel:#fff;--text:#18181b;--muted:#71717a;--border:#d4d4d8;--accent:#2563eb;--good:#15803d;--warn:#b45309}
+@media(prefers-color-scheme:dark){:root{--bg:#18181b;--panel:#27272a;--text:#fafafa;--muted:#a1a1aa;--border:#52525b;--accent:#60a5fa;--good:#4ade80;--warn:#fbbf24}}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+main{max-width:950px;margin:36px auto;padding:0 18px 40px}h1{font-size:1.75rem;margin:0 0 10px;line-height:1.2}
+.version{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:4px 9px;font-size:.8rem;font-weight:700;margin-bottom:10px}.byline{margin:0 0 10px;font-size:.92rem;color:var(--muted)}.byline a{color:var(--accent);text-decoration:none}.byline a:hover{text-decoration:underline}
+.sub{color:var(--muted);margin:0 0 22px;line-height:1.55}.panel{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:16px}
+.drop{border:2px dashed var(--border);border-radius:12px;padding:28px 18px;text-align:center;cursor:pointer}.drop.drag{border-color:var(--accent)}
+.drop strong{display:block;margin-bottom:6px}.drop small,.muted{color:var(--muted)}input[type=file]{display:none}.status{margin-top:14px;line-height:1.55}
+.ok{color:var(--good)}.warn{color:var(--warn)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+button{border:0;border-radius:9px;padding:10px 14px;font-weight:600;cursor:pointer;background:var(--accent);color:#fff}
+button.secondary{background:transparent;color:var(--text);border:1px solid var(--border)}button:disabled{opacity:.45;cursor:not-allowed}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.stat{border:1px solid var(--border);border-radius:10px;padding:12px}
+.stat b{display:block;font-size:1.45rem}.stat span{color:var(--muted);font-size:.9rem}#results{display:none}
+#list{margin:0;padding-left:22px;columns:2;column-gap:36px}#list li{break-inside:avoid;margin:5px 0}#list a,.instructions a{color:var(--accent);text-decoration:none}
+#list a:hover,.instructions a:hover{text-decoration:underline}details{margin-top:14px}pre{white-space:pre-wrap;word-break:break-word;border:1px solid var(--border);border-radius:9px;padding:10px;font-size:.85rem}
+code{background:color-mix(in srgb,var(--border) 35%,transparent);padding:2px 5px;border-radius:5px}.instructions{margin-top:20px;padding-top:18px;border-top:1px solid var(--border);line-height:1.55}
+.instructions h2{font-size:1.15rem;margin:0 0 8px}.instructions h3{font-size:1rem;margin:18px 0 6px}.instructions p{margin:7px 0}.instructions ol{padding-left:22px;margin:8px 0}.instructions li{margin:6px 0}
+.note{border-left:3px solid var(--accent);padding:9px 12px;margin-top:14px;background:color-mix(in srgb,var(--accent) 7%,transparent);border-radius:0 8px 8px 0}
+@media(max-width:650px){.summary{grid-template-columns:1fr}#list{columns:1}h1{font-size:1.45rem}}
+</style>
+</head>
+<body>
+<main>
+<h1>INSTAGRAM - KNOW WHO DOESN'T FOLLOW YOU BACK</h1>
+<div class="version">Version 1.0</div>
+<p class="byline">by <a href="https://www.reddit.com/user/JonPQ/" target="_blank" rel="noopener noreferrer">JonPQ</a></p>
+<p class="sub">
+  A basic HTML tool that runs locally in your web browser. It does not log in to Instagram,
+  connect to your account, request your password, or access any account data other than the
+  follower and following lists that you personally select from your Instagram data export.
+</p>
+
+<section class="panel">
+  <div id="drop" class="drop" tabindex="0">
+    <strong>Drag your Instagram HTML files here</strong>
+    <small>Or click to select them. Use <code>followers*.html</code> and <code>following*.html</code>.</small>
+    <input id="files" type="file" accept=".html,text/html" multiple>
+  </div>
+
+  <div id="status" class="status">No files have been loaded yet.</div>
+
+  <div class="actions">
+    <button id="compare" disabled>Compare</button>
+    <button id="reset" class="secondary">Clear</button>
+  </div>
+
+  <div class="instructions">
+    <h2>How it works</h2>
+    <p>
+      Instagram can provide you with an official copy of your followers and the accounts you follow.
+      This tool reads those two HTML lists on your own computer and compares them. It then shows the
+      accounts that appear in your <strong>Following</strong> list but not in your <strong>Followers</strong> list.
+    </p>
+
+    <h3>How to get the required files from Instagram</h3>
+    <ol>
+      <li>Open Instagram's official Accounts Center export page:
+        <a href="https://accountscenter.instagram.com/info_and_permissions/dyi/" target="_blank" rel="noopener noreferrer">Export your information</a>.
+      </li>
+      <li>Log in to Instagram if requested.</li>
+      <li>Choose <strong>Create export</strong>.</li>
+      <li>Select the Instagram profile you want to check.</li>
+      <li>Choose <strong>Export to device</strong>.</li>
+      <li>
+        In the information selection screen, first <strong>deselect all options</strong>, then select only
+        <strong>Followers and following</strong>. Depending on the current Instagram interface, this may appear
+        under a section such as <strong>Following, Threads and connections</strong>.
+      </li>
+      <li>Set the date range to <strong>All time</strong>.</li>
+      <li>Choose <strong>HTML</strong> as the file format.</li>
+      <li>
+        Start the export request. The time needed for Instagram to prepare the file varies depending on the
+        export options and amount of data selected. In most cases, when exporting only the follower/following
+        information, the file should be ready in less than 10 minutes.
+      </li>
+      <li>When Instagram makes the export available, download the ZIP file and extract it.</li>
+      <li>
+        After extracting the ZIP file, the files you need are usually located in
+        <code>connections/followers_and_following</code>. Inside that folder, the only files you should load into
+        this tool are the <strong>followers</strong> file and the <strong>following</strong> file
+        (normally <code>followers_1.html</code> or <code>followers.html</code>, and <code>following.html</code>).
+      </li>
+      <li>Drag those <strong>followers</strong> and <strong>following</strong> HTML files into the box above.</li>
+      <li>Click <strong>Compare</strong>.</li>
+    </ol>
+
+    <div class="note">
+      <strong>Privacy:</strong> all processing is performed locally inside this HTML page.
+      The selected files are not uploaded anywhere by this tool. You can even disconnect from
+      the Internet before comparing the files. An Internet connection is only needed if you later
+      click a username to open that Instagram profile.
+    </div>
+  </div>
+</section>
+
+<section id="results" class="panel">
+  <div class="summary">
+    <div class="stat"><b id="nFollowers">0</b><span>followers found</span></div>
+    <div class="stat"><b id="nFollowing">0</b><span>accounts you follow</span></div>
+    <div class="stat"><b id="nNotBack">0</b><span>do not follow you back</span></div>
+  </div>
+
+  <div class="actions" style="margin:0 0 14px">
+    <button id="copy">Copy usernames</button>
+    <button id="csv" class="secondary">Save CSV</button>
+  </div>
+
+  <ol id="list"></ol>
+
+  <details>
+    <summary>File diagnostics</summary>
+    <pre id="diag"></pre>
+  </details>
+</section>
+
+<script>
+(() => {
+  const USER_RE = /^[A-Za-z0-9._]{1,30}$/;
+  const RESERVED = new Set(['_u','accounts','account','explore','direct','p','reel','reels','stories','about','developer','legal','privacy','terms','web','challenge','emails']);
+
+  const drop = document.getElementById('drop');
+  const input = document.getElementById('files');
+  const status = document.getElementById('status');
+  const compareBtn = document.getElementById('compare');
+  const resetBtn = document.getElementById('reset');
+  const results = document.getElementById('results');
+  const list = document.getElementById('list');
+  const copyBtn = document.getElementById('copy');
+  const csvBtn = document.getElementById('csv');
+  const diag = document.getElementById('diag');
+
+  let followerFiles = [], followingFiles = [], lastResult = [];
+
+  function clean(s){return (s||'').trim().replace(/^@/,'').replace(/\/+$/,'')}
+  function isUsername(s){s=clean(s);return USER_RE.test(s)&&!RESERVED.has(s.toLowerCase())}
+
+  function usernameFromHref(href){
+    if(!href)return '';
+    try{
+      const u=new URL(href,'https://www.instagram.com/');
+      const host=u.hostname.toLowerCase().replace(/^www\./,'');
+      if(host!=='instagram.com')return '';
+      const parts=u.pathname.split('/').filter(Boolean).map(decodeURIComponent);
+      if(!parts.length)return '';
+      if(parts[0].toLowerCase()==='_u'&&parts[1]) return isUsername(parts[1])?clean(parts[1]):'';
+      for(let i=parts.length-1;i>=0;i--) if(isUsername(parts[i])) return clean(parts[i]);
+    }catch{}
+    return '';
+  }
+
+  function detectType(file){
+    const n=file.name.toLowerCase();
+    if(/^followers(?:_\d+)?\.html$/.test(n))return 'followers';
+    if(/^following(?:_\d+)?\.html$/.test(n))return 'following';
+    if(n.includes('followers')&&!n.includes('following'))return 'followers';
+    if(n.includes('following'))return 'following';
+    return null;
+  }
+
+  function renderStatus(){
+    const a=followerFiles.length?`<span class="ok">Followers: ${followerFiles.map(f=>f.name).join(', ')}</span>`:`<span class="warn">Missing followers*.html</span>`;
+    const b=followingFiles.length?`<span class="ok">Following: ${followingFiles.map(f=>f.name).join(', ')}</span>`:`<span class="warn">Missing following*.html</span>`;
+    status.innerHTML=a+'<br>'+b;
+    compareBtn.disabled=!(followerFiles.length&&followingFiles.length);
+  }
+
+  function addFiles(files){
+    for(const file of files){
+      if(!file.name.toLowerCase().endsWith('.html'))continue;
+      const type=detectType(file);
+      const target=type==='followers'?followerFiles:type==='following'?followingFiles:null;
+      if(target&&!target.some(f=>f.name===file.name&&f.size===file.size))target.push(file);
+    }
+    renderStatus();
+  }
+
+  drop.addEventListener('click',()=>input.click());
+  drop.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')input.click()});
+  input.addEventListener('change',()=>addFiles(input.files));
+
+  ['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('drag')}));
+  ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('drag')}));
+  drop.addEventListener('drop',e=>addFiles(e.dataTransfer.files));
+
+  async function usernamesFromFile(file){
+    const text=await file.text();
+    const doc=new DOMParser().parseFromString(text,'text/html');
+    const found=new Map();
+
+    for(const a of doc.querySelectorAll('a')){
+      const visible=clean(a.textContent);
+      const hrefUser=usernameFromHref(a.getAttribute('href')||'');
+      let candidate=isUsername(visible)?visible:hrefUser;
+      if(!candidate&&hrefUser)candidate=hrefUser;
+      if(isUsername(candidate))found.set(candidate.toLowerCase(),candidate);
+    }
+
+    for(const el of doc.querySelectorAll('h1,h2,h3,h4,div,span')){
+      if(el.children.length>0)continue;
+      const t=clean(el.textContent);
+      if(isUsername(t))found.set(t.toLowerCase(),t);
+    }
+    return found;
+  }
+
+  async function combine(files,typeLabel){
+    const combined=new Map(),lines=[];
+    for(const file of files){
+      const names=await usernamesFromFile(file);
+      lines.push(`${typeLabel} — ${file.name}: ${names.size} username(s) extracted`);
+      for(const [k,v] of names)combined.set(k,v);
+    }
+    return {combined,lines};
+  }
+
+  compareBtn.addEventListener('click',async()=>{
+    compareBtn.disabled=true;compareBtn.textContent='Comparing...';
+    try{
+      const f=await combine(followerFiles,'Followers');
+      const g=await combine(followingFiles,'Following');
+      const followers=f.combined,following=g.combined;
+
+      lastResult=[...following.entries()]
+        .filter(([key])=>!followers.has(key))
+        .map(([,display])=>display)
+        .sort((a,b)=>a.localeCompare(b,'en',{sensitivity:'base'}));
+
+      document.getElementById('nFollowers').textContent=followers.size;
+      document.getElementById('nFollowing').textContent=following.size;
+      document.getElementById('nNotBack').textContent=lastResult.length;
+
+      diag.textContent=[...f.lines,...g.lines,'',`Unique followers: ${followers.size}`,`Unique following accounts: ${following.size}`,`Do not follow you back: ${lastResult.length}`].join('\n');
+
+      list.innerHTML='';
+      for(const username of lastResult){
+        const li=document.createElement('li'),a=document.createElement('a');
+        a.href='https://www.instagram.com/'+encodeURIComponent(username)+'/';
+        a.target='_blank';a.rel='noopener noreferrer';a.textContent='@'+username;
+        li.appendChild(a);list.appendChild(li);
+      }
+
+      results.style.display='block';
+      results.scrollIntoView({behavior:'smooth',block:'start'});
+    }catch(err){
+      console.error(err);
+      alert('The files could not be processed. Make sure you selected the HTML files from the official Instagram data export.');
+    }finally{
+      compareBtn.textContent='Compare';
+      compareBtn.disabled=!(followerFiles.length&&followingFiles.length);
+    }
+  });
+
+  resetBtn.addEventListener('click',()=>{
+    followerFiles=[];followingFiles=[];lastResult=[];input.value='';
+    results.style.display='none';list.innerHTML='';
+    status.textContent='No files have been loaded yet.';compareBtn.disabled=true;
+  });
+
+  copyBtn.addEventListener('click',async()=>{
+    const text=lastResult.map(x=>'@'+x).join('\n');
+    try{
+      await navigator.clipboard.writeText(text);
+      const old=copyBtn.textContent;copyBtn.textContent='Copied';
+      setTimeout(()=>copyBtn.textContent=old,1200);
+    }catch{prompt('Copy the list:',text)}
+  });
+
+  csvBtn.addEventListener('click',()=>{
+    const rows=['username,profile',...lastResult.map(u=>`"${u.replace(/"/g,'""')}","https://www.instagram.com/${u.replace(/"/g,'""')}/"`)];
+    const blob=new Blob(['\ufeff'+rows.join('\r\n')],{type:'text/csv;charset=utf-8'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='instagram_not_following_back.csv';
+    document.body.appendChild(a);a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href),500);a.remove();
+  });
+})();
+</script>
+</main>
+</body>
+</html>
